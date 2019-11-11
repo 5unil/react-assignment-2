@@ -1,25 +1,33 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Validation from './Validation/Validation'
 
 class App extends Component {
+
+  state = {
+    characters: 0,
+    userInput: ''
+  }
+
+
+  inputChangedHandler = (event) => {
+
+    let length = event.target.value.length
+
+    this.setState({
+
+      characters: length,
+      userInput: event.target.value
+    })
+  }
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <input onChange = {this.inputChangedHandler} 
+               value={this.state.userInput} />
+        <p>{this.state.userInput}</p>
+        <Validation length={this.state.characters}  />
       </div>
     );
   }
